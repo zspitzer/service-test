@@ -11,6 +11,9 @@ jobs:
         with:
           accept-eula: true
           sqlserver-version: 2019
+      - name: search packages
+        if: always()
+        run: apt-cache search mssql-server
       - run: sqlcmd -U SA -P 'YourStrong!Passw0rd' -Q 'CREATE DATABASE testdb'
       - run: sqlcmd -U SA -P 'YourStrong!Passw0rd' -d testdb -Q 'SELECT @@VERSION'
       - uses: ankane/setup-mongodb@v1
